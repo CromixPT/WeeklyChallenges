@@ -10,7 +10,13 @@ namespace TextFileChallenge
     public partial class ChallengeForm:Form
     {
         BindingList<UserModel> users = new BindingList<UserModel>();
-        string filePath = @"D:\Repos\WeeklyChallenges\TextFileChallenge\TextFileChallenge\StandardDataSet.csv";
+        string filePath = @"D:\Repos\WeeklyChallenges\TextFileChallenge\TextFileChallenge\AdvancedDataSet.csv";
+        int firstNameIndex = 0;
+        int lastNameIndex = 0;
+        int ageIndex = 0;
+        int isAliveIndex = 0;
+
+
 
         public ChallengeForm()
         {
@@ -32,16 +38,7 @@ namespace TextFileChallenge
             newUser.FirstName = firstNameText.Text;
             newUser.LastName = lastNameText.Text;
             newUser.Age = (int)agePicker.Value;
-            if(!isAliveCheckbox.Checked)
-            {
-                newUser.IsAlive = false;
-            }
-            else
-            {
-                newUser.IsAlive = true;
-            }
-
-
+            newUser.IsAlive = isAliveCheckbox.Checked;
 
             users.Add(newUser);
         }
@@ -50,26 +47,53 @@ namespace TextFileChallenge
         {
 
 
-            var lines = File.ReadAllLines(filePath).Skip(1).ToList();
+            string firstLine = File.ReadLines(filePath).First();
+            List<string> lines = File.ReadAllLines(filePath).Skip(1).ToList();
 
+
+
+            var header = firstLine.Split(',');
+
+            for(int i = 0; i < header.Count(); i++)
+            {
+                switch(header[i])
+                {
+                    case "FirstName":
+                        firstNameIndex = i;
+                        break;
+                    case "LastName":
+                        lastNameIndex = i;
+                        break;
+                    case "Age":
+                        ageIndex = i;
+                        break;
+                    case "IsAlive":
+                        isAliveIndex = i;
+                        break;
+                    default:
+                        break;
+                }
+            }
             foreach(string line in lines)
             {
                 string[] info = line.Split(',');
 
                 var newUser = new UserModel();
 
-                newUser.FirstName = info[0];
-                newUser.LastName = info[1];
-                newUser.Age = Convert.ToInt32(info[2]);
+                newUser.FirstName = info[firstNameIndex];
+                newUser.LastName = info[lastNameIndex];
+                newUser.Age = Convert.ToInt32(info[ageIndex]);
 
-                newUser.IsAlive = Convert.ToBoolean(Convert.ToInt32(info[3]));
+                newUser.IsAlive = Convert.ToBoolean(Convert.ToInt32(info[isAliveIndex]));
 
                 users.Add(newUser);
             }
+
         }
 
         private void saveListButton_Click(object sender, EventArgs e)
         {
+
 
             List<string> output = new List<string>();
 
