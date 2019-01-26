@@ -15,5 +15,6 @@ Will keep the readme file updated with the last challenge I have finished, with 
 * Challenge 2 - Text Files in C# - Start: 26/01/2019 Finish: 26/01/2019 (2h - for part 1 alone)
 
      I needed to learn how WindowsForms and file IO work. Still having issues with bonus challenge part(fields in file are out of order and need to read to class based on column header). Can't find a way to fix this.
+     Update: Got the reading random order part done, still need to get a way to write in the same order.
 
 ---
