@@ -6,14 +6,14 @@ Will keep the readme file updated with the last challenge I have finished, with 
 
 ---
 
-* Challenge 1 - foreach in C# - Start: 26/01/2019 Finish: 26/01/2019
+* Challenge 1 - foreach in C# - Start: 26/01/2019 Finish: 26/01/2019 (30m)
 
      Took me about 30 minutes to do this challenge, although it seems fast I had problems reminding of how to access class     properties and how to initialize the list of the class instance
 
 ---
 
-* Challenge 2 - Text Files in C# - Start: 26/01/2019 Finish: 
+* Challenge 2 - Text Files in C# - Start: 26/01/2019 Finish: 26/01/2019 (2h - for part 1 alone)
 
-     Never used WPF, so I had to learn it first. Then tackle FILES
+     I needed to learn how WindowsForms and file IO work. Still having issues with bonus challenge part(fields in file are out of order and need to read to class based on column header). Can't find a way to fix this.
 
 ---
