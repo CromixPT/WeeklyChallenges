@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace TextFileChallenge
     public partial class ChallengeForm:Form
     {
         BindingList<UserModel> users = new BindingList<UserModel>();
+        string filePath = @"D:\Repos\WeeklyChallenges\TextFileChallenge\TextFileChallenge\StandardDataSet.csv";
 
         public ChallengeForm()
         {
@@ -46,9 +48,8 @@ namespace TextFileChallenge
 
         private void ChallengeForm_Load(object sender, EventArgs e)
         {
-            string filePath = @"D:\Repos\WeeklyChallenges\TextFileChallenge\TextFileChallenge\StandardDataSet.csv";
 
-            var header = File.ReadLines(filePath);
+
             var lines = File.ReadAllLines(filePath).Skip(1).ToList();
 
             foreach(string line in lines)
@@ -65,6 +66,21 @@ namespace TextFileChallenge
 
                 users.Add(newUser);
             }
+        }
+
+        private void saveListButton_Click(object sender, EventArgs e)
+        {
+
+            List<string> output = new List<string>();
+
+
+            output.Add("FirstName,LastName,Age,IsAlive");
+
+            foreach(var user in users)
+            {
+                output.Add($"{user.FirstName},{ user.LastName },{ user.Age},{Convert.ToInt32(user.IsAlive)}");
+            }
+            File.WriteAllLines(filePath, output);
         }
     }
 }
