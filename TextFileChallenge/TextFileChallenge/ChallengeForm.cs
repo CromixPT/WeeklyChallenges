@@ -10,12 +10,12 @@ namespace TextFileChallenge
     public partial class ChallengeForm:Form
     {
         BindingList<UserModel> users = new BindingList<UserModel>();
-        string filePath = @"D:\Repos\WeeklyChallenges\TextFileChallenge\TextFileChallenge\AdvancedDataSet.csv";
+        string filePath = @"D:\Repos\WeeklyChallenges\TextFileChallenge\TextFileChallenge\StandardDataSet.csv";
         int firstNameIndex = 0;
         int lastNameIndex = 0;
         int ageIndex = 0;
         int isAliveIndex = 0;
-
+        string firstLine;
 
 
         public ChallengeForm()
@@ -98,11 +98,19 @@ namespace TextFileChallenge
             List<string> output = new List<string>();
 
 
-            output.Add("FirstName,LastName,Age,IsAlive");
+            output.Add(firstLine);
 
             foreach(var user in users)
             {
-                output.Add($"{user.FirstName},{ user.LastName },{ user.Age},{Convert.ToInt32(user.IsAlive)}");
+                string[] outputString = new string[4];
+
+                outputString[firstNameIndex] = user.FirstName;
+                outputString[lastNameIndex] = user.LastName;
+                outputString[ageIndex] = user.Age.ToString();
+                outputString[isAliveIndex] = Convert.ToInt32(user.IsAlive).ToString();
+
+
+                output.Add($"{outputString[0]},{outputString[1]},{outputString[2]},{outputString[3]}");
             }
             File.WriteAllLines(filePath, output);
         }
