@@ -10,7 +10,7 @@ namespace TextFileChallenge
     public partial class ChallengeForm:Form
     {
         BindingList<UserModel> users = new BindingList<UserModel>();
-        string filePath = @"D:\Repos\WeeklyChallenges\TextFileChallenge\TextFileChallenge\StandardDataSet.csv";
+        string filePath = @"D:\Repos\WeeklyChallenges\TextFileChallenge\TextFileChallenge\AdvancedDataSet.csv";
         int firstNameIndex = 0;
         int lastNameIndex = 0;
         int ageIndex = 0;
@@ -96,7 +96,7 @@ namespace TextFileChallenge
 
 
             List<string> output = new List<string>();
-
+            string firstLine = File.ReadLines(filePath).First();
 
             output.Add(firstLine);
 
