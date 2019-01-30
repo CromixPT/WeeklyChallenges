@@ -19,3 +19,9 @@ Will keep the readme file updated with the last challenge I have finished, with 
      In a momment of inspiration figured how to do the writting part. Might not be the most beattifull code, but it works
 
 ---
+
+* Challenge 3 - Error Handling in C# - Start: 30/01/2019 13:50 Finish:  
+
+     Trying Hard :)
+
+---
