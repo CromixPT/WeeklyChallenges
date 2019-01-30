@@ -20,8 +20,8 @@ Will keep the readme file updated with the last challenge I have finished, with 
 
 ---
 
-* Challenge 3 - Error Handling in C# - Start: 30/01/2019 13:50 Finish:  
+* Challenge 3 - Error Handling in C# - Start: 30/01/2019 13:50 Finish: 30/01/2019 14:10  
 
-     Trying Hard :)
+     Seemed easier than should be, still second guessing my solution.
 
 ---

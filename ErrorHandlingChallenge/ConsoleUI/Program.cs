@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DemoLibrary;
 
 namespace ConsoleUI
@@ -12,11 +8,36 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             PaymentProcessor paymentProcessor = new PaymentProcessor();
-            for (int i = 0; i <= 10; i++)
+            for(int i = 0; i <= 10; i++)
             {
-                var result = paymentProcessor.MakePayment($"Demo{ i }", i);
 
-                Console.WriteLine(result.TransactionAmount);
+                try
+                {
+                    var result = paymentProcessor.MakePayment($"Demo{ i }", i);
+
+                    Console.WriteLine(result.TransactionAmount);
+                }
+                catch(NullReferenceException)
+                {
+                    Console.WriteLine($"Null value for item {i}");
+                }
+                catch(IndexOutOfRangeException)
+                {
+                    Console.WriteLine("Skipped invalid record");
+                }
+                catch(FormatException ex) when(i != 5)
+                {
+                    if(ex.InnerException != null)
+                        Console.WriteLine($"Formatting Issue {ex.InnerException.Message}");
+                    else
+                        Console.WriteLine("Formatting Issue");
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine($"Payment skipped for payment with {i} items");
+                    //throw;
+
+                }
             }
             Console.ReadLine();
         }
