@@ -1,21 +1,18 @@
-﻿using Dapper;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Dapper;
+using DrapperLibrary.Models;
 
 namespace WinFormApp
 {
-    public partial class Dashboard : Form
+    public partial class Dashboard:Form
     {
-        BindingList<SystemUserModel> users = new BindingList<SystemUserModel>();
+        BindingList<UserModel> users = new BindingList<UserModel>();
 
         public Dashboard()
         {
@@ -26,9 +23,9 @@ namespace WinFormApp
 
             string connectionString = ConfigurationManager.ConnectionStrings["DapperDemoDB"].ConnectionString;
 
-            using (IDbConnection cnn = new SqlConnection(connectionString))
+            using(IDbConnection cnn = new SqlConnection(connectionString))
             {
-                var records = cnn.Query<SystemUserModel>("spSystemUser_Get", commandType: CommandType.StoredProcedure).ToList();
+                var records = cnn.Query<UserModel>("spSystemUser_Get", commandType: CommandType.StoredProcedure).ToList();
 
                 users.Clear();
                 records.ForEach(x => users.Add(x));
@@ -39,7 +36,7 @@ namespace WinFormApp
         {
             string connectionString = ConfigurationManager.ConnectionStrings["DapperDemoDB"].ConnectionString;
 
-            using (IDbConnection cnn = new SqlConnection(connectionString))
+            using(IDbConnection cnn = new SqlConnection(connectionString))
             {
                 var p = new
                 {
@@ -53,7 +50,7 @@ namespace WinFormApp
                 lastNameText.Text = "";
                 firstNameText.Focus();
 
-                var records = cnn.Query<SystemUserModel>("spSystemUser_Get", commandType: CommandType.StoredProcedure).ToList();
+                var records = cnn.Query<UserModel>("spSystemUser_Get", commandType: CommandType.StoredProcedure).ToList();
 
                 users.Clear();
                 records.ForEach(x => users.Add(x));
@@ -64,14 +61,14 @@ namespace WinFormApp
         {
             string connectionString = ConfigurationManager.ConnectionStrings["DapperDemoDB"].ConnectionString;
 
-            using (IDbConnection cnn = new SqlConnection(connectionString))
+            using(IDbConnection cnn = new SqlConnection(connectionString))
             {
                 var p = new
                 {
                     Filter = filterUsersText.Text
                 };
 
-                var records = cnn.Query<SystemUserModel>("spSystemUser_GetFiltered", p, commandType: CommandType.StoredProcedure).ToList();
+                var records = cnn.Query<UserModel>("spSystemUser_GetFiltered", p, commandType: CommandType.StoredProcedure).ToList();
 
                 users.Clear();
                 records.ForEach(x => users.Add(x));

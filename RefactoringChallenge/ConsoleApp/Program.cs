@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Dapper;
+using DrapperLibrary.Models;
 
 namespace ConsoleApp
 {
@@ -14,6 +12,7 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
+
             string actionToTake = "";
             string connectionString = ConfigurationManager.ConnectionStrings["DapperDemoDB"].ConnectionString;
 
@@ -22,10 +21,10 @@ namespace ConsoleApp
                 Console.Write("What action do you want to take (Display, Add, or Quit): ");
                 actionToTake = Console.ReadLine();
 
-                switch (actionToTake.ToLower())
+                switch(actionToTake.ToLower())
                 {
                     case "display":
-                        using (IDbConnection cnn = new SqlConnection(connectionString))
+                        using(IDbConnection cnn = new SqlConnection(connectionString))
                         {
                             var records = cnn.Query<UserModel>("spSystemUser_Get", commandType: CommandType.StoredProcedure).ToList();
 
@@ -41,7 +40,7 @@ namespace ConsoleApp
                         Console.Write("What is the last name: ");
                         string lastName = Console.ReadLine();
 
-                        using (IDbConnection cnn = new SqlConnection(connectionString))
+                        using(IDbConnection cnn = new SqlConnection(connectionString))
                         {
                             var p = new
                             {
@@ -56,7 +55,7 @@ namespace ConsoleApp
                     default:
                         break;
                 }
-            } while (actionToTake.ToLower() != "quit");
+            } while(actionToTake.ToLower() != "quit");
         }
     }
 }
