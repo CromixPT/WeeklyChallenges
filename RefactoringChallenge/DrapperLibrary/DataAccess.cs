@@ -10,26 +10,30 @@ namespace DrapperLibrary
 {
     public class DataAccess
     {
-        static string connectionString = ConfigurationManager.ConnectionStrings["DapperDemoDB"].ConnectionString;
-
-        public static List<UserModel> GetUsers()
+        public static List<UserModel> GetUsers(string filter)
         {
-
-            using(IDbConnection cnn = new SqlConnection(connectionString))
+            using(IDbConnection connection = GetConnection())
             {
-                return cnn.Query<UserModel>("spSystemUser_Get", commandType: CommandType.StoredProcedure).ToList();
-
+                if(filter != "")
+                {
+                    return connection.Query<UserModel>("spSystemUser_GetFiltered", new { Filter = filter }, commandType: CommandType.StoredProcedure).ToList();
+                }
+                return connection.Query<UserModel>("spSystemUser_Get", commandType: CommandType.StoredProcedure).ToList();
             }
+
         }
 
         public static void AddUser(UserModel user)
         {
-
-            using(IDbConnection cnn = new SqlConnection(connectionString))
+            using(IDbConnection connection = GetConnection())
             {
-
-                cnn.Execute("dbo.spSystemUser_Create", new { FirstName = user.FirstName, LastName = user.LastName }, commandType: CommandType.StoredProcedure);
+                connection.Execute("dbo.spSystemUser_Create", new { FirstName = user.FirstName, LastName = user.LastName }, commandType: CommandType.StoredProcedure);
             }
+        }
+
+        private static IDbConnection GetConnection()
+        {
+            return new SqlConnection(ConfigurationManager.ConnectionStrings["DapperDemoDB"].ConnectionString;)
         }
     }
 }

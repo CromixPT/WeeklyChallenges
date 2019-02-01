@@ -20,7 +20,7 @@ namespace ConsoleApp
                 switch(actionToTake.ToLower())
                 {
                     case "display":
-                        var records = DataAccess.GetUsers();
+                        var records = DataAccess.GetUsers("");
                         records.ForEach(x => Console.WriteLine($"{ x.FirstName } { x.LastName }"));
                         Console.WriteLine();
                         break;

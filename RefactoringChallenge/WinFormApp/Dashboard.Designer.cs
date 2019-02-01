@@ -51,10 +51,10 @@
             // headerLabel
             // 
             this.headerLabel.AutoSize = true;
-            this.headerLabel.Font = new System.Drawing.Font("Open Sans", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.headerLabel.Location = new System.Drawing.Point(12, 19);
             this.headerLabel.Name = "headerLabel";
-            this.headerLabel.Size = new System.Drawing.Size(256, 51);
+            this.headerLabel.Size = new System.Drawing.Size(316, 54);
             this.headerLabel.TabIndex = 0;
             this.headerLabel.Text = "System Users";
             // 
@@ -85,10 +85,10 @@
             // createUserLabel
             // 
             this.createUserLabel.AutoSize = true;
-            this.createUserLabel.Font = new System.Drawing.Font("Open Sans", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.createUserLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.createUserLabel.Location = new System.Drawing.Point(11, 36);
             this.createUserLabel.Name = "createUserLabel";
-            this.createUserLabel.Size = new System.Drawing.Size(269, 43);
+            this.createUserLabel.Size = new System.Drawing.Size(325, 46);
             this.createUserLabel.TabIndex = 4;
             this.createUserLabel.Text = "Create New User";
             // 
@@ -96,7 +96,7 @@
             // 
             this.lastNameText.Location = new System.Drawing.Point(171, 177);
             this.lastNameText.Name = "lastNameText";
-            this.lastNameText.Size = new System.Drawing.Size(235, 40);
+            this.lastNameText.Size = new System.Drawing.Size(235, 41);
             this.lastNameText.TabIndex = 3;
             // 
             // lastNameLabel
@@ -104,7 +104,7 @@
             this.lastNameLabel.AutoSize = true;
             this.lastNameLabel.Location = new System.Drawing.Point(13, 180);
             this.lastNameLabel.Name = "lastNameLabel";
-            this.lastNameLabel.Size = new System.Drawing.Size(131, 33);
+            this.lastNameLabel.Size = new System.Drawing.Size(156, 36);
             this.lastNameLabel.TabIndex = 2;
             this.lastNameLabel.Text = "Last Name";
             // 
@@ -112,7 +112,7 @@
             // 
             this.firstNameText.Location = new System.Drawing.Point(171, 106);
             this.firstNameText.Name = "firstNameText";
-            this.firstNameText.Size = new System.Drawing.Size(235, 40);
+            this.firstNameText.Size = new System.Drawing.Size(235, 41);
             this.firstNameText.TabIndex = 1;
             // 
             // firstNameLabel
@@ -120,7 +120,7 @@
             this.firstNameLabel.AutoSize = true;
             this.firstNameLabel.Location = new System.Drawing.Point(13, 109);
             this.firstNameLabel.Name = "firstNameLabel";
-            this.firstNameLabel.Size = new System.Drawing.Size(134, 33);
+            this.firstNameLabel.Size = new System.Drawing.Size(158, 36);
             this.firstNameLabel.TabIndex = 0;
             this.firstNameLabel.Text = "First Name";
             // 
@@ -148,10 +148,10 @@
             // filterUsersLabel
             // 
             this.filterUsersLabel.AutoSize = true;
-            this.filterUsersLabel.Font = new System.Drawing.Font("Open Sans", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterUsersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.filterUsersLabel.Location = new System.Drawing.Point(11, 36);
             this.filterUsersLabel.Name = "filterUsersLabel";
-            this.filterUsersLabel.Size = new System.Drawing.Size(186, 43);
+            this.filterUsersLabel.Size = new System.Drawing.Size(223, 46);
             this.filterUsersLabel.TabIndex = 4;
             this.filterUsersLabel.Text = "Filter Users";
             // 
@@ -159,8 +159,9 @@
             // 
             this.filterUsersText.Location = new System.Drawing.Point(19, 90);
             this.filterUsersText.Name = "filterUsersText";
-            this.filterUsersText.Size = new System.Drawing.Size(387, 40);
+            this.filterUsersText.Size = new System.Drawing.Size(387, 41);
             this.filterUsersText.TabIndex = 1;
+            this.filterUsersText.TextChanged += new System.EventHandler(this.applyFilterButton_Click);
             // 
             // displayGroup
             // 
@@ -175,32 +176,32 @@
             // userDisplayList
             // 
             this.userDisplayList.FormattingEnabled = true;
-            this.userDisplayList.ItemHeight = 33;
+            this.userDisplayList.ItemHeight = 36;
             this.userDisplayList.Location = new System.Drawing.Point(19, 106);
             this.userDisplayList.Name = "userDisplayList";
-            this.userDisplayList.Size = new System.Drawing.Size(386, 499);
+            this.userDisplayList.Size = new System.Drawing.Size(386, 472);
             this.userDisplayList.TabIndex = 5;
             // 
             // displayUsersLabel
             // 
             this.displayUsersLabel.AutoSize = true;
-            this.displayUsersLabel.Font = new System.Drawing.Font("Open Sans", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.displayUsersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.displayUsersLabel.Location = new System.Drawing.Point(11, 36);
             this.displayUsersLabel.Name = "displayUsersLabel";
-            this.displayUsersLabel.Size = new System.Drawing.Size(219, 43);
+            this.displayUsersLabel.Size = new System.Drawing.Size(266, 46);
             this.displayUsersLabel.TabIndex = 4;
             this.displayUsersLabel.Text = "Display Users";
             // 
             // Dashboard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 33F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 36F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(963, 730);
             this.Controls.Add(this.displayGroup);
             this.Controls.Add(this.filterGroup);
             this.Controls.Add(this.insertGroup);
             this.Controls.Add(this.headerLabel);
-            this.Font = new System.Drawing.Font("Open Sans", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.Name = "Dashboard";
             this.Text = "Refactoring Challenge by Tim Corey";

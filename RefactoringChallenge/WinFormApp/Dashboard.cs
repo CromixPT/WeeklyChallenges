@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
 using System.Windows.Forms;
-using Dapper;
 using DrapperLibrary;
 using DrapperLibrary.Models;
 
@@ -23,7 +18,9 @@ namespace WinFormApp
             userDisplayList.DataSource = users;
             userDisplayList.DisplayMember = "FullName";
 
-            List<UserModel> userList = DataAccess.GetUsers();
+            string filter = filterUsersText.Text;
+
+            List<UserModel> userList = DataAccess.GetUsers(filter);
 
             UpdateUserList(userList);
 
@@ -40,7 +37,8 @@ namespace WinFormApp
 
             DataAccess.AddUser(newUser);
 
-            List<UserModel> userList = DataAccess.GetUsers();
+            string filter = filterUsersText.Text;
+            List<UserModel> userList = DataAccess.GetUsers(filter);
 
             UpdateUserList(userList);
 
@@ -53,20 +51,13 @@ namespace WinFormApp
 
         private void applyFilterButton_Click(object sender, EventArgs e)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["DapperDemoDB"].ConnectionString;
 
-            using(IDbConnection cnn = new SqlConnection(connectionString))
-            {
-                var p = new
-                {
-                    Filter = filterUsersText.Text
-                };
+            string filter = filterUsersText.Text;
 
-                var records = cnn.Query<UserModel>("spSystemUser_GetFiltered", p, commandType: CommandType.StoredProcedure).ToList();
+            List<UserModel> userList = DataAccess.GetUsers(filter);
 
-                UpdateUserList(records);
+            UpdateUserList(userList);
 
-            }
         }
 
         private void UpdateUserList(List<UserModel> userList)
