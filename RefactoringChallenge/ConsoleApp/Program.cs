@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using Dapper;
 using DrapperLibrary;
+using DrapperLibrary.Models;
 
 namespace ConsoleApp
 {
@@ -13,7 +10,7 @@ namespace ConsoleApp
         {
 
             string actionToTake = "";
-            string connectionString = ConfigurationManager.ConnectionStrings["DapperDemoDB"].ConnectionString;
+
 
             do
             {
@@ -23,34 +20,36 @@ namespace ConsoleApp
                 switch(actionToTake.ToLower())
                 {
                     case "display":
-                        var records = DataAccess.GetUsers(connectionString);
+                        var records = DataAccess.GetUsers();
                         records.ForEach(x => Console.WriteLine($"{ x.FirstName } { x.LastName }"));
-
                         Console.WriteLine();
                         break;
                     case "add":
-                        Console.Write("What is the first name: ");
-                        string firstName = Console.ReadLine();
 
-                        Console.Write("What is the last name: ");
-                        string lastName = Console.ReadLine();
+                        DataAccess.AddUser(GetUserData());
 
-                        using(IDbConnection cnn = new SqlConnection(connectionString))
-                        {
-                            var p = new
-                            {
-                                FirstName = firstName,
-                                LastName = lastName
-                            };
-
-                            cnn.Execute("dbo.spSystemUser_Create", p, commandType: CommandType.StoredProcedure);
-                        }
-                        Console.WriteLine();
                         break;
                     default:
                         break;
                 }
             } while(actionToTake.ToLower() != "quit");
+        }
+
+        public static UserModel GetUserData()
+        {
+            UserModel newUser = new UserModel();
+
+            Console.Write("What is the first name: ");
+            newUser.FirstName = Console.ReadLine();
+
+            Console.Write("What is the last name: ");
+            newUser.LastName = Console.ReadLine();
+
+            Console.WriteLine();
+
+            return newUser;
+
+
         }
     }
 }

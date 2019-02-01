@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
@@ -6,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
 using Dapper;
+using DrapperLibrary;
 using DrapperLibrary.Models;
 
 namespace WinFormApp
@@ -21,40 +23,32 @@ namespace WinFormApp
             userDisplayList.DataSource = users;
             userDisplayList.DisplayMember = "FullName";
 
-            string connectionString = ConfigurationManager.ConnectionStrings["DapperDemoDB"].ConnectionString;
+            List<UserModel> userList = DataAccess.GetUsers();
 
-            using(IDbConnection cnn = new SqlConnection(connectionString))
-            {
-                var records = cnn.Query<UserModel>("spSystemUser_Get", commandType: CommandType.StoredProcedure).ToList();
+            UpdateUserList(userList);
 
-                users.Clear();
-                records.ForEach(x => users.Add(x));
-            }
         }
 
         private void createUserButton_Click(object sender, EventArgs e)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["DapperDemoDB"].ConnectionString;
 
-            using(IDbConnection cnn = new SqlConnection(connectionString))
+            UserModel newUser = new UserModel
             {
-                var p = new
-                {
-                    FirstName = firstNameText.Text,
-                    LastName = lastNameText.Text
-                };
+                FirstName = firstNameText.Text,
+                LastName = lastNameText.Text
+            };
 
-                cnn.Execute("dbo.spSystemUser_Create", p, commandType: CommandType.StoredProcedure);
+            DataAccess.AddUser(newUser);
 
-                firstNameText.Text = "";
-                lastNameText.Text = "";
-                firstNameText.Focus();
+            List<UserModel> userList = DataAccess.GetUsers();
 
-                var records = cnn.Query<UserModel>("spSystemUser_Get", commandType: CommandType.StoredProcedure).ToList();
+            UpdateUserList(userList);
 
-                users.Clear();
-                records.ForEach(x => users.Add(x));
-            }
+            firstNameText.Text = "";
+            lastNameText.Text = "";
+            firstNameText.Focus();
+
+
         }
 
         private void applyFilterButton_Click(object sender, EventArgs e)
@@ -70,9 +64,15 @@ namespace WinFormApp
 
                 var records = cnn.Query<UserModel>("spSystemUser_GetFiltered", p, commandType: CommandType.StoredProcedure).ToList();
 
-                users.Clear();
-                records.ForEach(x => users.Add(x));
+                UpdateUserList(records);
+
             }
+        }
+
+        private void UpdateUserList(List<UserModel> userList)
+        {
+            users.Clear();
+            userList.ForEach(x => users.Add(x));
         }
     }
 }

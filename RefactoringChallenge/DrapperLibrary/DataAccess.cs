@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -9,8 +10,11 @@ namespace DrapperLibrary
 {
     public class DataAccess
     {
-        public static List<UserModel> GetUsers(string connectionString)
+        static string connectionString = ConfigurationManager.ConnectionStrings["DapperDemoDB"].ConnectionString;
+
+        public static List<UserModel> GetUsers()
         {
+
             using(IDbConnection cnn = new SqlConnection(connectionString))
             {
                 return cnn.Query<UserModel>("spSystemUser_Get", commandType: CommandType.StoredProcedure).ToList();
@@ -18,5 +22,14 @@ namespace DrapperLibrary
             }
         }
 
+        public static void AddUser(UserModel user)
+        {
+
+            using(IDbConnection cnn = new SqlConnection(connectionString))
+            {
+
+                cnn.Execute("dbo.spSystemUser_Create", new { FirstName = user.FirstName, LastName = user.LastName }, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }
