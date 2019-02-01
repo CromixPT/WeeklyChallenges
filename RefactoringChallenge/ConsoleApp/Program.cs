@@ -2,9 +2,8 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using Dapper;
-using DrapperLibrary.Models;
+using DrapperLibrary;
 
 namespace ConsoleApp
 {
@@ -24,13 +23,9 @@ namespace ConsoleApp
                 switch(actionToTake.ToLower())
                 {
                     case "display":
-                        using(IDbConnection cnn = new SqlConnection(connectionString))
-                        {
-                            var records = cnn.Query<UserModel>("spSystemUser_Get", commandType: CommandType.StoredProcedure).ToList();
+                        var records = DataAccess.GetUsers(connectionString);
+                        records.ForEach(x => Console.WriteLine($"{ x.FirstName } { x.LastName }"));
 
-                            Console.WriteLine();
-                            records.ForEach(x => Console.WriteLine($"{ x.FirstName } { x.LastName }"));
-                        }
                         Console.WriteLine();
                         break;
                     case "add":
