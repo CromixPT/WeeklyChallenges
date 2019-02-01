@@ -26,7 +26,7 @@ Will keep the readme file updated with the last challenge I have finished, with 
 
 ---
 
-* Challenge 4 - RefactoringChallenge in C# - Start: 01/02/2019 11:56 Finish: 30/01/2019 14:10  
+* Challenge 4 - RefactoringChallenge in C# - Start: 01/02/2019 Finish: 
 
      
 ---
