@@ -26,7 +26,10 @@ Will keep the readme file updated with the last challenge I have finished, with 
 
 ---
 
-* Challenge 4 - RefactoringChallenge in C# - Start: 01/02/2019 Finish: 
-
+* Challenge 4 - RefactoringChallenge in C# - Start: 01/02/2019 Finish: 01/02/2019
      
+     Had some trouble with refactoring the database connection part, its a 
+     solution I'm confortable with, proabably not the best out there, always
+     room to improve with more time and experience.
+    
 ---
