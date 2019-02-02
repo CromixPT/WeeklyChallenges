@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DrapperLibrary;
 using DrapperLibrary.Models;
 
@@ -10,7 +11,7 @@ namespace ConsoleApp
         {
 
             string actionToTake = "";
-
+            string filter = "";
 
             do
             {
@@ -20,13 +21,16 @@ namespace ConsoleApp
                 switch(actionToTake.ToLower())
                 {
                     case "display":
-                        var records = DataAccess.GetUsers("");
-                        records.ForEach(x => Console.WriteLine($"{ x.FirstName } { x.LastName }"));
-                        Console.WriteLine();
+                        var userList = DataAccess.GetUsers(filter);
+
+                        ListUsers(userList);
+
                         break;
                     case "add":
 
-                        DataAccess.AddUser(GetUserData());
+                        var newUser = GetUserData();
+
+                        DataAccess.AddUser(newUser);
 
                         break;
                     default:
@@ -51,5 +55,14 @@ namespace ConsoleApp
 
 
         }
+
+
+        public static void ListUsers(List<UserModel> userList)
+        {
+            userList.ForEach(x => Console.WriteLine($"{ x.FirstName } { x.LastName }"));
+
+            Console.WriteLine();
+        }
+
     }
 }

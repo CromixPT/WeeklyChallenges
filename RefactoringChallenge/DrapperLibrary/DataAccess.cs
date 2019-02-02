@@ -33,7 +33,7 @@ namespace DrapperLibrary
 
         private static IDbConnection GetConnection()
         {
-            return new SqlConnection(ConfigurationManager.ConnectionStrings["DapperDemoDB"].ConnectionString;)
+            return new SqlConnection(ConfigurationManager.ConnectionStrings["DapperDemoDB"].ConnectionString);
         }
     }
 }
