@@ -33,3 +33,10 @@ Will keep the readme file updated with the last challenge I have finished, with 
      room to improve with more time and experience.
     
 ---
+
+* Challenge 5 - ConfigFileChallenge in C# - Start: 02/02/2019 Finish: 02/02/2019
+      
+     Managed to do the challenge with help of the msdn page :)
+     Its all there :)
+    
+---
